@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>实验室座位预约</title>
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+    <script src="../static/js/bootstrap.min.js"></script>
+    <style>
+        html{
+          height: 100%;
+        }
+        body{
+            background-color:rgb(34,37,41);
+        }
+        p {
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="">个人中心</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="{{ url_for('index') }}">系统主页</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="{{ url_for('mine') }}">个人中心</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('search') }}">搜索</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        帮助
+                    </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" href="{{ url_for('regulation') }}">规章制度</a></li>
+                </ul>
+                </li>
+            </ul>
+            </div>
+        </div>
+    </nav>
+    <hr style="color: white;"/>
+    <div class="container-fluidr">
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">{{ username }}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">{{ user_id }}</h6>
+                <form action="/mine", method="POST">
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" id="inputGroup-sizing-sm">原密码</span>
+                        <input type="password" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" name="old_password">
+                    </div>
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" id="inputGroup-sizing-sm">输入新密码</span>
+                        <input type="password" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" name="new_password">
+                    </div>
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" id="inputGroup-sizing-sm">确认密码</span>
+                        <input type="password" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" name="sure_password">
+                    </div>
+                    <p style="color: red">{{ wrong }}</p>
+                    <div class="d-grid gap-2 col-6 mx-auto">
+                        <button type="submit" class="btn btn-secondary">修改密码</button>
+                        <a type="button" href="{{ url_for('logout') }}" class="btn btn-secondary">退出登录</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    <h5 style="text-align: center; color: white;">我的预约</h5>
+        <div style="width:100%;background-color: white;">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">实验室名称</th>
+                        <th scope="col">地点</th>
+                        <th scope="col">座位号</th>
+                        <th scope="col">日期</th>
+                        <th scope="col">操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {%  for mi_app in mine_appointment %}
+                    <tr>
+                        <th scope="row">{{ mi_app[1] }}</th>
+                        <td>{{ mi_app[2] }}</td>
+                        <td>{{ mi_app[3] }}</td>
+                        <td>{{ mi_app[4] }}</td>
+                        <td><!--数据库操作-->
+                            <form action="/sign" method="POST">
+                                <select name="mine_sign" style="display: none">
+                                    <option selected="selected">{{ mi_app[0] }}</option>
+                                </select>
+                                    {% if mi_app[5] == 0 %}
+                                        <button id="bn-1" type="submit" class="btn btn-success">签到</button>
+                                    {% elif mi_app[5] == 1 %}
+                                        <button id="bn-1" type="submit" class="btn btn-success" disabled="disabled">已签到</button>
+                                    {% endif %}
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+        </div>
+    </div>
+</body>
+</html>

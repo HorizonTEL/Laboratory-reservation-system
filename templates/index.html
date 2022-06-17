@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>实验室座位预约</title>
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+    <script src="../static/js/bootstrap.min.js"></script>
+    <style>
+        html{
+          height: 100%;
+        }
+        body{
+            background-color:rgb(34,37,41);
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="">预约系统</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{{ url_for('index') }}">系统主页</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('mine') }}">个人中心</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('search') }}">搜索</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        帮助
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" href="{{ url_for('regulation') }}">规章制度</a></li>
+                </ul>
+                </li>
+            </ul>
+            </div>
+            <table class="table table-dark table-borderless">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">种类</th>
+                        <th scope="col">剩余量</th>
+                        <th scope="col">操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>生物实验室</td>
+                        <td>{{ numbers[0] }}</td>
+                        <td><!--跳转操作-->
+                            <form action="/appoint" method="POST">
+                                <select name="appointment" style="display: none">
+                                    <option selected="selected">生物实验室</option>
+                                </select>
+                                <button id="bn-1" type="submit" class="btn btn-outline-primary">查看</button>
+                            </form>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">2</th>
+                        <td>化学实验室</td>
+                        <td>{{ numbers[1] }}</td>
+                        <td>
+                            <form action="/appoint" method="POST">
+                                <select name="appointment" style="display: none">
+                                    <option selected="selected">化学实验室</option>
+                                </select>
+                                <button id="bn-1" type="submit" class="btn btn-outline-primary">查看</button>
+                            </form></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">3</th>
+                        <td>物理实验室</td>
+                        <td>{{ numbers[2] }}</td>
+                        <td>
+                            <form action="/appoint" method="POST">
+                                <select name="appointment" style="display: none">
+                                    <option selected="selected">物理实验室</option>
+                                </select>
+                                <button id="bn-1" type="submit" class="btn btn-outline-primary">查看</button>
+                            </form>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">4</th>
+                        <td>机房</td>
+                        <td>{{ numbers[3] }}</td>
+                        <td>
+                            <form action="/appoint" method="POST">
+                                <select name="appointment" style="display: none">
+                                    <option selected="selected">机房</option>
+                                </select>
+                                <button id="bn-1" type="submit" class="btn btn-outline-primary">查看</button>
+                            </form>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <button type="button"  class="btn btn-link">
+                <a href="{{ url_for('logout') }}">退出登录</a>
+            </button>
+        </div>
+    </nav>
+</body>
+</html>

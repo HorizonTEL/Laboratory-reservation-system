@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>实验室座位预约</title>
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+    <script src="../static/js/bootstrap.min.js"></script>
+    <style>
+        html{
+          height: 100%;
+        }
+        body{
+            background-color:rgb(34,37,41);
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="">预约系统->搜索</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+            <form class="d-flex" role="search" action="/search" method="POST">
+                <input class="form-control me-2" id="input-1" type="search" placeholder="请输入要查询的实验室编号" aria-label="Search" name="sea">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+            </div>
+            <table class="table table-dark table-borderless">
+                <thead>
+                    <tr>
+                        <th scope="col">实验室名称</th>
+                        <th scope="col">剩余量</th>
+                        <th scope="col">地址</th>
+                        <th scope="col">操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for  appointment in appointments %}
+                    <tr>
+                        <th scope="row">{{ appointment[1] }}</th>
+                        <td>{{ appointment[2] }}</td>
+                        <td>{{ appointment[3] }}</td>
+                        <td>
+                            <form action="/search_appoint" method="POST">
+                                <select name="laboratory_id" style="display: none">
+                                    <option selected="selected">{{ appointment[0] }}</option>
+                                </select>
+                                {% if appointment[4] == 0 %}
+                                    <button id="bn-1" type="submit" class="btn btn-outline-success">预约</button>
+                                {% elif appointment[4] == 1 %}
+                                    <button id="bn-1" type="submit" class="btn btn-outline-success">取消预约</button>
+                                {% elif appointment[4] == 2 %}
+                                    <button id="bn-1" type="submit" class="btn btn-outline-success" disabled="disabled">已签到</button>
+                                {% endif %}
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            <a href="{{ url_for('index') }}" class="btn btn-link">返回主页</a>
+        </div>
+    </nav>
+</body>
+</html>

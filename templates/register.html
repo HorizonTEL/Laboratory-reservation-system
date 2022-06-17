@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>注册</title>
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+    <script src="../static/js/bootstrap.min.js"></script>
+    <style>
+        html{
+          height: 100%;
+        }
+        body{
+            background-image: url(https://img.zcool.cn/community/01274855f7a84832f875a132a15b65.jpg?x-oss-process=image/auto-orient,1);
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: 100% 100%;
+            height: 100%;
+            width: 100%;
+        }
+        .col-center-block {
+          float: none;
+          display: block;
+          margin-left: auto;
+          margin-right: auto;
+          margin-top: 10%;
+          text-align: center;
+          max-width: 300px;
+        }
+        .textcolor{
+        color: white;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        function jump(){
+            window.location.href="login.html";
+        }
+    </script>
+    <div class="container">
+        <div class="row row-centered">
+            <div class="col-xs-6 col-md-4 col-center-block">
+                <h2 class="textcolor">用户注册</h2>
+                <form action="/register" method="POST">
+                    <div class="form-floating mb-2">
+                        <input type="text" class="form-control" id="floatingInput" name="id" placeholder="User">
+                        <label for="floatingInput">学号</label>
+                    </div>
+                    <div class="form-floating mb-2">
+                        <input type="password" class="form-control" id="floatingPassword" name="name" placeholder="Name">
+                        <label for="floatingPassword">姓名</label>
+                    </div>
+                    <div class="form-floating mb-2">
+                        <input type="password" class="form-control" id="floatingPassword" name="password" placeholder="Password">
+                        <label for="floatingPassword">密码</label>
+                    </div>
+                    <div class="form-floating mb-2">
+                        <input type="password" class="form-control" id="floatingPassword" name="password_true" placeholder="Password">
+                        <label for="floatingPassword">确认密码</label>
+                    </div>
+                    <div class="form-floating">
+                        <input type="tel" class="form-control" id="floatingInput" name="phone" placeholder="tel">
+                        <label for="floatingPassword">电话号码</label>
+                    </div>
+                    <p style="color: red;font-size: small">{{ wrong }}</p>
+                    <div class="d-grid gap-2">
+                        <button class="btn btn-success" type="submit">注册</button>
+                        <a class="btn btn-primary" href="{{url_for('login')}}" type="button">返回</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>    
+</body>
+</html>

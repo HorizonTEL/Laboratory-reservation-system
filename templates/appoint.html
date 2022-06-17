@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>实验室座位预约</title>
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+    <script src="../static/js/bootstrap.min.js"></script>
+    <style>
+        html{
+          height: 100%;
+        }
+        body{
+            background-color:rgb(34,37,41);
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="">预约系统</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{{ url_for('index') }}">系统主页</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('mine') }}">个人中心</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('search') }}">搜索</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        帮助
+                    </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" href="{{ url_for('regulation') }}">规章制度</a></li>
+                </ul>
+                </li>
+            </ul>
+            </div>
+        </div>
+    </nav>
+    <br/>
+    <h5 style="text-align: center; color: white;">{{ name }}</h5>
+    <table class="table table-dark table-borderless">
+        <thead>
+            <tr>
+                <th scope="col">实验室名称</th>
+                <th scope="col">剩余量</th>
+                <th scope="col">地址</th>
+                <th scope="col">操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for appoint_de in appoint_detail %}
+            <tr>
+                <th scope="row">{{ appoint_de[1] }}</th>
+                <td>{{ appoint_de[3] }}</td>
+                <td>{{ appoint_de[2] }}</td>
+                <td><!--数据库操作-->
+                    <form action="/appointment" method="POST">
+                        <select name="appoint" style="display: none">
+                            <option selected="selected">{{ appoint_de[0] }}</option>
+                        </select>
+                         {% if appoint_de[4] == 0 %}
+                             <button id="bn-1" type="submit" class="btn btn-success">预约</button>
+                         {% elif appoint_de[4] == 1 %}
+                             <button id="bn-1" type="submit" class="btn btn-success">取消预约</button>
+                         {% elif appoint_de[4] == 2 %}
+                             <button id="bn-1" type="submit" class="btn btn-success" disabled="disabled">已签到</button>
+                         {% endif %}
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{{ url_for('index') }}" class="btn btn-link">返回</a>
+</body>
+</html>

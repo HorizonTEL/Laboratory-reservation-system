@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>用户登录</title>
+  <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+  <script src="../static/js/bootstrap.min.js"></script>
+  
+  <style type="text/css">
+      html{
+          height: 100%;
+          width: 100%;
+      }
+      body{
+          background-image: url(https://img.zcool.cn/community/01274855f7a84832f875a132a15b65.jpg?x-oss-process=image/auto-orient,1);
+          background-repeat: no-repeat;
+          background-attachment: fixed;
+          background-size: 100% 100%;
+          height: 100%;
+          width: 100%;
+      }
+      .col-center-block {
+          float: none;
+          display: block;
+          margin-left: auto;
+          margin-right: auto;
+          margin-top: 20%;
+          text-align: center;
+          max-width: 333px;
+      }
+      .edit {
+          margin-top: 10px;
+      }
+      .textcolor{
+        color: white;
+      }
+  </style>
+</head>
+<body>
+  <!--跳转注册-->
+  <!--跳转后台(仅供参考，后台由php实现)-->
+    <div class="container">
+      <div class="row row-centered">
+        <div class="col-xs-6 col-md-4 col-center-block">
+          <h1 class="textcolor">欢迎登录</h1>
+          <!-- 两个输入框 -->
+          <!-- 输入id -->
+            <form action="/login" method="POST">
+                <div class="input-group input-group-md">
+                    <span class="input-group-addon" id="sizing-addon1"></span>
+                    <input type="text" class="form-control" id="userid" name="userid" placeholder="请输入学号"/>
+                </div>
+                <!-- 输入密码 -->
+                <div class="edit input-group input-group-md">
+                    <span class="input-group-addon" id="sizing-addon2"></span>
+                    <input type="password" class="form-control" id="password" name="password" placeholder="请输入密码"/>
+                </div>
+                <p style="color: red;font-size: small">{{ wrong }}</p>
+                <div class="d-grid gap-2">
+                  <!--登录注册按钮-->
+                  <button class="btn btn-success" type="submit">登录</button>
+                        <a class="btn btn-primary"type="button" href="{{url_for('register')}}">注册</a>
+                  <br/>
+                  <button type="submit" class="btn btn-outline-light">后台管理登录</button>
+                </div>
+            </form>
+
+          </div>
+        </div>
+    </div>
+</body>
+</html>
