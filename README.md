@@ -1,5 +1,5 @@
 # Laboratory-reservation-system
-####作者： JZY-nuist、Rom-LRQ
+#### 作者： JZY-nuist、Rom-LRQ
 ### 项目介绍
 ```
 该项目是基于flask和bootstrap搭建的实验室预约系统，学生能够注册、登录、预约、取消预约以及签到。管理员可以查看学生的预约信息并且可以对未签到的预约信息进行删除
